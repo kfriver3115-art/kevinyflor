@@ -74,19 +74,27 @@ h1{
   color:#ffccd5;
 }
 
-.carrusel{
+/* GALERIA 5 FOTOS */
+.galeria{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:15px;
   margin:40px auto;
-  width:300px;
-  height:400px;
-  overflow:hidden;
-  border-radius:20px;
-  box-shadow:0 0 30px rgba(255,0,90,0.5);
+  max-width:700px;
 }
 
-.carrusel img{
-  width:100%;
-  height:100%;
+.galeria img{
+  width:150px;
+  height:200px;
   object-fit:cover;
+  border-radius:15px;
+  box-shadow:0 0 20px rgba(255,0,90,0.5);
+  transition:0.4s;
+}
+
+.galeria img:hover{
+  transform:scale(1.08);
 }
 
 .seccion{
@@ -121,7 +129,7 @@ button{
   box-shadow:0 0 20px rgba(255,0,90,0.5);
 }
 
-/* Corazones Final */
+/* Corazones */
 .corazon{
   position:fixed;
   bottom:-10px;
@@ -140,7 +148,7 @@ button{
 
 <!-- INTRO -->
 <div id="intro">
-  <h1>Flor… ❤️<br><br>Flor, antes de entrar, quiero que sepas algo.</h1>
+  <h1>Flor… ❤️<br><br>Antes de entrar, quiero que sepas algo.</h1>
   <button onclick="entrar()">Entrar a Nuestra Historia ✨</button>
 </div>
 
@@ -149,8 +157,13 @@ button{
 <p>Y cada paso que damos, lo damos tomados de Su mano </p>
 <div class="contador" id="contador"></div>
 
-<div class="carrusel">
-  <img id="foto" src="foto1.jpg">
+<!-- GALERIA NUEVA -->
+<div class="galeria">
+  <img src="foto1.jpg">
+  <img src="foto2.jpg">
+  <img src="foto3.jpg">
+  <img src="foto4.jpg">
+  <img src="foto5.jpg">
 </div>
 
 <button onclick="toggleMusica()">🎵 Nuestra Canción</button>
@@ -173,13 +186,13 @@ Kevin 💖
 "Por encima de todo, vístanse de amor, que es el vínculo perfecto".</p>
 
 <p><b>1 Corintios 13:4-7</b><br>
-"El amor es sufrido, es benigno; el amor no tiene envidia..."</p>
+"El amor es sufrido, es benigno..."</p>
 
 <p><b>Cantares 4:7</b><br>
-"Toda tú eres bella, amada mía; no hay en ti defecto alguno".</p>
+"Toda tú eres bella, amada mía."</p>
 
 <p><b>Proverbios 18:22</b><br>
-"Quien halla esposa halla la felicidad: muestras de su favor le ha dado el Señor".</p>
+"Quien halla esposa halla la felicidad."</p>
 </div>
 
 <div class="seccion">
@@ -189,11 +202,25 @@ Kevin 💖
 </video>
 </div>
 
+<!-- FINAL IMPACTANTE -->
+<div class="seccion">
+  <h1 style="font-size:36px; margin-top:80px;">
+    Flor, quiero caminar contigo toda la vida ❤️
+  </h1>
+
+  <h2 style="margin-top:30px;">
+    💍 ¿Quieres seguir siendo mi compañera de viaje?
+  </h2>
+
+  <button onclick="finalImpactante()">Siempre ❤️</button>
+</div>
+
 <audio id="musica" loop>
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+
 // Entrar
 function entrar(){
   document.getElementById("intro").style.display="none";
@@ -210,14 +237,6 @@ function actualizar(){
 }
 setInterval(actualizar,1000);
 actualizar();
-
-// Carrusel
-const imagenes=["foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg","foto5.jpg"];
-let i=0;
-setInterval(()=>{
-  i=(i+1)%imagenes.length;
-  document.getElementById("foto").src=imagenes[i];
-},4000);
 
 // Música
 function toggleMusica(){
@@ -249,7 +268,7 @@ for(let j=0;j<80;j++){
   document.body.appendChild(estrella);
 }
 
-// Lluvia final
+// Lluvia suave constante
 setInterval(()=>{
   const corazon=document.createElement("div");
   corazon.innerHTML="❤️";
@@ -257,7 +276,22 @@ setInterval(()=>{
   corazon.style.left=Math.random()*100+"vw";
   document.body.appendChild(corazon);
   setTimeout(()=>corazon.remove(),5000);
-},800);
+},2000);
+
+// FINAL IMPACTANTE
+function finalImpactante(){
+  for(let k=0;k<150;k++){
+    const corazon=document.createElement("div");
+    corazon.innerHTML="💖";
+    corazon.className="corazon";
+    corazon.style.left=Math.random()*100+"vw";
+    corazon.style.fontSize=(Math.random()*25+20)+"px";
+    corazon.style.animationDuration=(Math.random()*3+2)+"s";
+    document.body.appendChild(corazon);
+    setTimeout(()=>corazon.remove(),5000);
+  }
+}
+
 </script>
 
 </body>
