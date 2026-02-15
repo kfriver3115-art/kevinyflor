@@ -15,7 +15,7 @@ body{
   overflow-x:hidden;
 }
 
-/* INTRO CINEMATOGRÁFICO */
+/* INTRO */
 #intro{
   position:fixed;
   width:100%;
@@ -25,13 +25,12 @@ body{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  z-index:100;
+  z-index:999;
 }
 
 #intro h1{
   font-size:28px;
-  opacity:0;
-  animation:fade 3s forwards;
+  animation:fadeIn 3s ease forwards;
 }
 
 #intro button{
@@ -44,7 +43,8 @@ body{
   cursor:pointer;
 }
 
-@keyframes fade{
+@keyframes fadeIn{
+  from{opacity:0;}
   to{opacity:1;}
 }
 
@@ -55,17 +55,12 @@ body{
   height:2px;
   background:white;
   animation:twinkle 2s infinite alternate;
+  pointer-events:none;
 }
 
 @keyframes twinkle{
-  from{opacity:0.2;}
+  from{opacity:0.3;}
   to{opacity:1;}
-}
-
-h1{
-  margin-top:70px;
-  font-size:40px;
-  color:#ff4d6d;
 }
 
 /* CONTADOR */
@@ -131,8 +126,6 @@ h1{
 .envelope:before{
   content:'';
   position:absolute;
-  top:0;
-  left:0;
   width:100%;
   height:100%;
   background:#333;
@@ -146,20 +139,49 @@ h1{
 
 .letter{
   display:none;
-  margin-top:20px;
+  margin:20px auto;
   max-width:400px;
-  margin-left:auto;
-  margin-right:auto;
   background:#111;
   padding:20px;
   border-radius:15px;
   box-shadow:0 0 20px rgba(255,0,90,0.5);
 }
 
-/* FINAL */
-.final{
-  font-size:28px;
-  margin-top:60px;
+/* LUZ DIVINA */
+.light{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:radial-gradient(circle at top, rgba(255,215,0,0.7), transparent 70%);
+  opacity:0;
+  pointer-events:none;
+  transition:2s;
+  z-index:500;
+}
+
+/* RAYOS */
+.ray{
+  position:fixed;
+  top:0;
+  width:2px;
+  height:100vh;
+  background:linear-gradient(to bottom, rgba(255,215,0,0.8), transparent);
+  opacity:0;
+  pointer-events:none;
+}
+
+/* ANILLO */
+.ring{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  font-size:70px;
+  opacity:0;
+  transition:1.5s;
+  z-index:600;
 }
 
 /* CORAZONES */
@@ -167,6 +189,7 @@ h1{
   position:fixed;
   bottom:-10px;
   animation:rise 5s linear infinite;
+  pointer-events:none;
 }
 
 @keyframes rise{
@@ -188,10 +211,9 @@ button{
 
 <body>
 
-<!-- INTRO -->
 <div id="intro">
   <h1>Flor… ❤️<br><br>Antes de entrar…<br>Quiero que sepas algo…</h1>
-  <button onclick="enter()">✨ Entrar a Nuestra Historia</button>
+  <button onclick="enterSite()">✨ Entrar a Nuestra Historia</button>
 </div>
 
 <h1>Kevin & Flor ❤️</h1>
@@ -199,47 +221,41 @@ button{
 <div class="section">
 <p>Dios fue quien escribió nuestra historia…<br>
 Y cada paso que damos, lo damos tomados de Su mano.</p>
-<p><i>“El amor es paciente, es bondadoso…”</i><br>(1 Corintios 13)</p>
 </div>
 
-<!-- CONTADOR -->
 <div class="counter">
   <div class="box"><span id="years">0</span><br>AÑOS</div>
   <div class="box"><span id="months">0</span><br>MESES</div>
   <div class="box"><span id="days">0</span><br>DÍAS</div>
 </div>
 
-<!-- GALERÍA -->
 <div class="gallery">
   <img id="photo" src="foto1.jpg">
 </div>
 
-<!-- LÍNEA DE TIEMPO -->
 <div class="section">
-  <p>📍 20/01/2026 – Nuestro inicio</p>
-  <p>📍 Nuestro primer viaje</p>
-  <p>📍 Nuestro momento favorito</p>
-  <p>📍 Promesa eterna</p>
+<p>📍 20/01/2026 – Nuestro inicio</p>
+<p>📍 Nuestro primer viaje</p>
+<p>📍 Nuestro momento favorito</p>
+<p>📍 Promesa eterna</p>
 </div>
 
-<!-- SOBRE -->
 <div class="envelope" onclick="openLetter()"></div>
 <div class="letter" id="letter">
 Flor ❤️<br><br>
 Prometo amarte con paciencia, fe y propósito.<br>
 Caminar contigo de la mano de Dios todos los días.<br>
-Eres mi bendición y mi hogar.<br><br>
 Siempre tuyo,<br>Kevin 💖
 </div>
 
-<!-- FINAL -->
-<div class="final section">
-Flor, quiero caminar contigo toda la vida.
-<br><br>
-💍 ¿Quieres seguir siendo mi compañera de viaje?
-<br>
+<div class="section">
+<p style="font-size:26px;">Flor, quiero caminar contigo toda la vida.</p>
+<p>💍 ¿Quieres seguir siendo mi compañera de viaje?</p>
 <button onclick="bigLove()">Siempre ❤️</button>
 </div>
+
+<div class="light" id="light"></div>
+<div class="ring" id="ring">💍</div>
 
 <audio id="music" loop>
   <source src="musica.mp3" type="audio/mpeg">
@@ -247,9 +263,9 @@ Flor, quiero caminar contigo toda la vida.
 
 <script>
 // ENTRAR
-function enter(){
+function enterSite(){
   document.getElementById("intro").style.display="none";
-  document.getElementById("music").play();
+  document.getElementById("music").play().catch(()=>{});
 }
 
 // CONTADOR
@@ -265,17 +281,18 @@ function update(){
   document.getElementById("months").innerText=m;
   document.getElementById("days").innerText=d;
 }
-setInterval(update,1000);update();
+setInterval(update,1000);
+update();
 
 // GALERÍA
-const images=["foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg","foto5.jpg];
+const images=["foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg","foto5.jpg"];
 let i=0;
 setInterval(()=>{
   i=(i+1)%images.length;
   document.getElementById("photo").src=images[i];
 },4000);
 
-// SCROLL ANIMACIÓN
+// SCROLL
 window.addEventListener("scroll",()=>{
   document.querySelectorAll(".section").forEach(sec=>{
     if(sec.getBoundingClientRect().top<window.innerHeight-50){
@@ -299,28 +316,31 @@ for(let j=0;j<80;j++){
   document.body.appendChild(star);
 }
 
-// CORAZONES SUAVES
-setInterval(()=>{
-  const heart=document.createElement("div");
-  heart.innerHTML="❤️";
-  heart.className="heart";
-  heart.style.left=Math.random()*100+"vw";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),5000);
-},1200);
-
-// CORAZONES INTENSOS
+// EFECTO DIVINO FINAL
 function bigLove(){
-  for(let k=0;k<50;k++){
+
+  document.getElementById("light").style.opacity="1";
+
+  const ring=document.getElementById("ring");
+  ring.style.opacity="1";
+  ring.style.transform="translate(-50%,-50%) scale(1.5)";
+
+  // Rayos
+  for(let r=0;r<10;r++){
+    const ray=document.createElement("div");
+    ray.className="ray";
+    ray.style.left=Math.random()*100+"vw";
+    ray.style.opacity="1";
+    document.body.appendChild(ray);
+    setTimeout(()=>ray.remove(),3000);
+  }
+
+  // Corazones intensos
+  for(let k=0;k<60;k++){
     const heart=document.createElement("div");
     heart.innerHTML="💖";
     heart.className="heart";
     heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+20)+"px";
     document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),5000);
-  }
-}
-</script>
-
-</body>
-</html>
+    setTimeout(()=>heart.rem
