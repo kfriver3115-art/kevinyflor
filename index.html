@@ -5,13 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kevin y Flor</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  font-family:'Poppins',sans-serif;
+  font-family:Arial, sans-serif;
   background:#000;
   color:white;
   overflow-x:hidden;
@@ -32,154 +30,98 @@ body{
 }
 
 #intro h1{
-  font-family:'Playfair Display',serif;
-  font-size:42px;
-  line-height:1.4;
-  animation:fadeIn 3s ease forwards;
+  font-size:32px;
+  margin-bottom:30px;
   opacity:0;
+  animation:fade 3s forwards;
 }
 
-@keyframes fadeIn{
+@keyframes fade{
   to{opacity:1}
 }
 
-.btn{
-  margin-top:40px;
-  padding:15px 45px;
-  background:linear-gradient(45deg,#d4af37,#ff4da6);
+button{
+  padding:15px 35px;
+  background:gold;
   border:none;
-  border-radius:40px;
-  font-size:18px;
-  color:white;
+  border-radius:30px;
   cursor:pointer;
-  box-shadow:0 0 25px rgba(255,215,0,0.6);
-  transition:.3s;
-}
-
-.btn:hover{
-  transform:scale(1.05);
+  font-size:16px;
 }
 
 /* SECCIONES */
 section{
-  padding:90px 20px;
+  padding:80px 20px;
   text-align:center;
 }
 
 h2{
-  font-family:'Playfair Display',serif;
-  font-size:32px;
-  margin-bottom:25px;
+  margin-bottom:20px;
 }
 
 /* CONTADOR */
 .counter{
   display:flex;
   justify-content:center;
-  gap:25px;
+  gap:20px;
   flex-wrap:wrap;
 }
 
-.time-box{
+.box{
   background:#111;
-  padding:25px;
-  border-radius:20px;
-  min-width:120px;
-  box-shadow:0 0 20px rgba(255,105,180,0.3);
+  padding:20px;
+  border-radius:10px;
+  min-width:100px;
 }
 
-.time-box span{
-  font-size:28px;
-  font-weight:600;
-  color:#ff69b4;
+.box span{
+  font-size:24px;
+  color:pink;
 }
 
 /* CARRUSEL */
 .carousel{
-  position:relative;
   width:90%;
-  max-width:800px;
+  max-width:600px;
   margin:auto;
   overflow:hidden;
-  border-radius:20px;
-  box-shadow:0 0 25px rgba(255,255,255,0.2);
 }
 
-.carousel-track{
+.track{
   display:flex;
-  transition:transform 0.6s ease-in-out;
+  transition:0.5s;
 }
 
-.carousel img{
+.track img{
   width:100%;
   flex-shrink:0;
-  object-fit:cover;
-}
-
-input[type="file"]{
-  margin-bottom:20px;
 }
 
 /* SOBRE */
 .envelope{
-  width:220px;
-  height:150px;
-  margin:30px auto;
-  background:linear-gradient(45deg,#fff,#f2f2f2);
-  position:relative;
+  width:200px;
+  height:120px;
+  background:white;
+  margin:20px auto;
   cursor:pointer;
-  border-radius:10px;
-}
-
-.envelope:before{
-  content:'';
-  position:absolute;
-  top:0;
-  width:100%;
-  height:75px;
-  background:#ddd;
-  clip-path:polygon(0 0,100% 0,50% 100%);
 }
 
 .letter{
   display:none;
-  max-width:600px;
-  margin:30px auto;
-  font-size:18px;
-  line-height:1.6;
+  margin-top:20px;
 }
 
-/* FINAL CELESTIAL */
+/* EFECTOS */
 .light{
   position:fixed;
   top:0;
   left:0;
   width:100%;
   height:100%;
-  background:radial-gradient(circle at top, rgba(255,215,0,0.7), transparent 70%);
+  background:radial-gradient(circle at top, rgba(255,215,0,0.6), transparent 70%);
   opacity:0;
-  pointer-events:none;
   transition:2s;
-  z-index:200;
-}
-
-.rays{
-  position:fixed;
-  top:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:400px;
-  height:100%;
-  background:linear-gradient(to bottom, rgba(255,215,0,0.5), transparent);
-  opacity:0;
   pointer-events:none;
-  animation:rayMove 3s infinite alternate;
-  z-index:201;
-}
-
-@keyframes rayMove{
-  from{transform:translateX(-50%) scaleY(1)}
-  to{transform:translateX(-50%) scaleY(1.2)}
 }
 
 .ring{
@@ -187,6 +129,138 @@ input[type="file"]{
   top:50%;
   left:50%;
   transform:translate(-50%,-50%) scale(0);
-  font-size:70px;
+  font-size:60px;
   opacity:0;
-  transition:1.5s;
+  transition:1s;
+}
+
+.heart{
+  position:fixed;
+  top:-10px;
+  animation:fall 5s linear;
+}
+
+@keyframes fall{
+  to{transform:translateY(100vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+  <h1>Flor…<br>Antes de entrar…<br>Quiero que sepas algo…</h1>
+  <button onclick="start()">Entrar a Nuestra Historia</button>
+</div>
+
+<audio id="music" loop>
+  <source src="cancion.mp3" type="audio/mp3">
+</audio>
+
+<div class="light" id="light"></div>
+<div class="ring" id="ring">💍</div>
+
+<section>
+<h2>Dios escribió nuestra historia</h2>
+<p>El amor es paciente, es bondadoso...</p>
+</section>
+
+<section>
+<h2>Nuestro tiempo juntos</h2>
+<div class="counter">
+  <div class="box"><span id="years">0</span><br>Años</div>
+  <div class="box"><span id="days">0</span><br>Días</div>
+</div>
+</section>
+
+<section>
+<h2>Galería</h2>
+<input type="file" multiple accept="image/*" onchange="loadImages(event)">
+<div class="carousel">
+  <div class="track" id="track"></div>
+</div>
+</section>
+
+<section>
+<h2>Carta</h2>
+<div class="envelope" onclick="openLetter()"></div>
+<div class="letter" id="letter">
+Flor, quiero caminar contigo toda la vida.
+</div>
+</section>
+
+<section>
+<h2>¿Quieres seguir siendo mi compañera?</h2>
+<button onclick="bigLove()">Siempre ❤️</button>
+</section>
+
+<script>
+
+/* ENTRAR */
+function start(){
+  document.getElementById("intro").style.display="none";
+  document.getElementById("music").play().catch(()=>{});
+}
+
+/* CONTADOR */
+const startDate=new Date("2026-01-20");
+setInterval(()=>{
+  const now=new Date();
+  const diff=now-startDate;
+  const days=Math.floor(diff/(1000*60*60*24));
+  document.getElementById("days").innerText=days;
+  document.getElementById("years").innerText=Math.floor(days/365);
+},1000);
+
+/* CARRUSEL */
+let index=0;
+let interval;
+
+function loadImages(event){
+  const track=document.getElementById("track");
+  track.innerHTML="";
+  for(let file of event.target.files){
+    const img=document.createElement("img");
+    img.src=URL.createObjectURL(file);
+    track.appendChild(img);
+  }
+  startCarousel();
+}
+
+function startCarousel(){
+  const track=document.getElementById("track");
+  const slides=track.children;
+  if(slides.length===0)return;
+  clearInterval(interval);
+  interval=setInterval(()=>{
+    index=(index+1)%slides.length;
+    track.style.transform="translateX(-"+index*100+"%)";
+  },3000);
+}
+
+/* CARTA */
+function openLetter(){
+  document.getElementById("letter").style.display="block";
+}
+
+/* FINAL */
+function bigLove(){
+  document.getElementById("light").style.opacity="1";
+  const ring=document.getElementById("ring");
+  ring.style.opacity="1";
+  ring.style.transform="translate(-50%,-50%) scale(1.5)";
+  for(let i=0;i<50;i++){
+    const heart=document.createElement("div");
+    heart.innerHTML="💖";
+    heart.className="heart";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+15)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+  }
+}
+
+</script>
+
+</body>
+</html>
