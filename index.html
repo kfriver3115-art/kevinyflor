@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kevin y Flor</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:#000;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* PANTALLA INICIAL */
+#intro{
+  position:fixed;
+  width:100%;
+  height:100vh;
+  background:black;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  z-index:1000;
+}
+
+#intro h1{
+  font-family:'Playfair Display',serif;
+  font-size:40px;
+  animation:fade 3s infinite alternate;
+}
+
+@keyframes fade{
+  from{opacity:0.4}
+  to{opacity:1}
+}
+
+.btn{
+  margin-top:30px;
+  padding:15px 40px;
+  background:linear-gradient(45deg,gold,#ff69b4);
+  border:none;
+  border-radius:30px;
+  font-size:18px;
+  cursor:pointer;
+  color:white;
+  box-shadow:0 0 20px rgba(255,215,0,0.6);
+}
+
+/* SECCIONES */
+section{
+  padding:80px 20px;
+  text-align:center;
+}
+
+/* CONTADOR */
+.counter{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  font-size:22px;
+}
+
+.box{
+  background:#111;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 0 15px rgba(255,105,180,0.4);
+}
+
+/* GALERIA */
+.gallery{
+  display:flex;
+  overflow-x:auto;
+  gap:20px;
+  padding:20px;
+}
+
+.gallery img{
+  height:300px;
+  border-radius:20px;
+  box-shadow:0 0 20px rgba(255,255,255,0.3);
+}
+
+/* SOBRE */
+.envelope{
+  width:200px;
+  height:150px;
+  background:#fff;
+  margin:20px auto;
+  position:relative;
+  cursor:pointer;
+}
+
+.letter{
+  display:none;
+  margin-top:20px;
+}
+
+/* CORAZONES */
+.heart{
+  position:fixed;
+  top:-10px;
+  animation:fall 5s linear;
+}
+
+@keyframes fall{
+  to{transform:translateY(100vh);opacity:0}
+}
+
+/* LUZ DIVINA */
+.light{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:radial-gradient(circle at top, rgba(255,215,0,0.6), transparent 70%);
+  opacity:0;
+  pointer-events:none;
+  transition:2s;
+  z-index:200;
+}
+
+/* RAYOS */
+.rays{
+  position:fixed;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:300px;
+  height:100%;
+  background:linear-gradient(to bottom, rgba(255,215,0,0.5), transparent);
+  opacity:0;
+  pointer-events:none;
+  transition:2s;
+  z-index:201;
+}
+
+/* ANILLO */
+.ring{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  font-size:70px;
+  opacity:0;
+  transition:1.5s;
+  z-index:300;
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+  <h1>Flor…<br>Antes de entrar…<br>Quiero que sepas algo…</h1>
+  <button class="btn" onclick="start()">✨ Entrar a Nuestra Historia</button>
+</div>
+
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio>
+
+<div class="light" id="light"></div>
+<div class="rays" id="rays"></div>
+<div class="ring" id="ring">💍</div>
+
+<section>
+<h2>🙏 Dios escribió nuestra historia</h2>
+<p>“El amor es paciente, es bondadoso...”<br>1 Corintios 13:4-7</p>
+</section>
+
+<section>
+<h2>⏳ Nuestro tiempo juntos</h2>
+<div class="counter">
+  <div class="box"><span id="years">0</span><br>Años</div>
+  <div class="box"><span id="days">0</span><br>Días</div>
+</div>
+</section>
+
+<section>
+<h2>📸 Nuestros recuerdos</h2>
+<input type="file" multiple accept="image/*" onchange="loadImages(event)">
+<div class="gallery" id="gallery"></div>
+</section>
+
+<section>
+<h2>💌 Carta para ti</h2>
+<div class="envelope" onclick="openLetter()"></div>
+<div class="letter" id="letter">
+Flor, quiero caminar contigo toda la vida.  
+Eres mi compañera de viaje, mi regalo de Dios.
+</div>
+</section>
+
+<section>
+<h2>💍 ¿Quieres seguir siendo mi compañera de viaje?</h2>
+<button class="btn" onclick="bigLove()">Siempre ❤️</button>
+</section>
+
+<script>
+function start(){
+  document.getElementById("intro").style.display="none";
+  document.getElementById("music").play();
+}
+
+/* CONTADOR */
+const startDate=new Date("2026-01-20");
+setInterval(()=>{
+  const now=new Date();
+  const diff=now-startDate;
+  const days=Math.floor(diff/(1000*60*60*24));
+  document.getElementById("days").innerText=days;
+  document.getElementById("years").innerText=Math.floor(days/365);
+},1000);
+
+/* GALERIA */
+function loadImages(event){
+  const gallery=document.getElementById("gallery");
+  gallery.innerHTML="";
+  for(let file of event.target.files){
+    const img=document.createElement("img");
+    img.src=URL.createObjectURL(file);
+    gallery.appendChild(img);
+  }
+}
+
+/* CARTA */
+function openLetter(){
+  document.getElementById("letter").style.display="block";
+}
+
+/* FINAL DIVINO */
+function bigLove(){
+  document.getElementById("light").style.opacity="1";
+  document.getElementById("rays").style.opacity="1";
+  const ring=document.getElementById("ring");
+  ring.style.opacity="1";
+  ring.style.transform="translate(-50%,-50%) scale(1.5)";
+  for(let k=0;k<80;k++){
+    const heart=document.createElement("div");
+    heart.innerHTML="💖";
+    heart.className="heart";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+20)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+  }
+}
+</script>
+
+</body>
+</html>
