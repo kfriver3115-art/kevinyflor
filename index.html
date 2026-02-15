@@ -3,28 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kevin y Flor ❤️</title>
+<title>Kevin & Flor ❤️</title>
 
 <style>
 body{
   margin:0;
-  font-family: 'Georgia', serif;
-  background: radial-gradient(circle at top, #1a0000, #000000);
+  font-family:'Georgia', serif;
+  background: radial-gradient(circle at top, #0a0a0a, #000);
   color:white;
   text-align:center;
   overflow-x:hidden;
 }
 
-h1{
-  margin-top:40px;
-  font-size:45px;
-  color:#ff4d6d;
-  animation: fadeIn 2s ease-in-out;
+/* Pantalla Inicial */
+#intro{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:black;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
 }
 
-p{
-  font-size:20px;
-  padding:0 20px;
+#intro h1{
+  font-size:28px;
+  opacity:0;
+  animation:fadeIn 3s forwards;
+}
+
+#intro button{
+  margin-top:30px;
+  padding:15px 30px;
+  border:none;
+  border-radius:30px;
+  background:gold;
+  font-size:18px;
+  cursor:pointer;
+}
+
+@keyframes fadeIn{
+  to{opacity:1;}
+}
+
+/* Estrellas */
+.estrella{
+  position:fixed;
+  width:2px;
+  height:2px;
+  background:white;
+  animation:parpadear 2s infinite alternate;
+}
+
+@keyframes parpadear{
+  from{opacity:0.2;}
+  to{opacity:1;}
+}
+
+h1{
+  margin-top:60px;
+  font-size:42px;
+  color:#ff4d6d;
 }
 
 .contador{
@@ -39,54 +80,53 @@ p{
   height:400px;
   overflow:hidden;
   border-radius:20px;
-  box-shadow:0 0 25px rgba(255,0,90,0.6);
+  box-shadow:0 0 30px rgba(255,0,90,0.5);
 }
 
 .carrusel img{
   width:100%;
   height:100%;
   object-fit:cover;
-  transition: opacity 1s ease-in-out;
+}
+
+.seccion{
+  margin:50px 20px;
+  opacity:0;
+  transform:translateY(30px);
+  transition:1s;
+}
+
+.visible{
+  opacity:1;
+  transform:translateY(0);
 }
 
 button{
-  margin:15px;
-  padding:15px 30px;
+  padding:12px 25px;
   border:none;
   border-radius:30px;
   background:#ff4d6d;
   color:white;
-  font-size:18px;
   cursor:pointer;
-}
-
-button:hover{
-  background:#ff1e4d;
+  margin:10px;
 }
 
 .carta{
-  width:80%;
+  display:none;
+  margin:20px auto;
   max-width:400px;
-  margin:30px auto;
   background:#111;
   padding:20px;
   border-radius:15px;
-  display:none;
   box-shadow:0 0 20px rgba(255,0,90,0.5);
-  animation: fadeIn 1s ease-in-out;
 }
 
-@keyframes fadeIn{
-  from{opacity:0;}
-  to{opacity:1;}
-}
-
-/* Corazones */
+/* Corazones Final */
 .corazon{
   position:fixed;
   bottom:-10px;
-  color:#ff4d6d;
-  animation: subir 6s linear infinite;
+  font-size:20px;
+  animation:subir 5s linear infinite;
 }
 
 @keyframes subir{
@@ -98,11 +138,14 @@ button:hover{
 
 <body>
 
-<h1>Kevin y Flor ❤️</h1>
+<!-- INTRO -->
+<div id="intro">
+  <h1>Flor… ❤️<br><br>Esta historia fue escrita por Dios.</h1>
+  <button onclick="entrar()">Entrar a Nuestra Historia ✨</button>
+</div>
 
-<p>
-Desde el 20 de Enero de 2026 comenzó nuestra historia más hermosa.
-</p>
+<h1>Kevin & Flor ❤️</h1>
+<p>Gracias Dios por unirnos 🙏</p>
 
 <div class="contador" id="contador"></div>
 
@@ -111,17 +154,39 @@ Desde el 20 de Enero de 2026 comenzó nuestra historia más hermosa.
 </div>
 
 <button onclick="toggleMusica()">🎵 Nuestra Canción</button>
-<button onclick="abrirCarta()">💌 Abrir Carta</button>
+<button onclick="abrirCarta()">💌 Leer Mi Promesa</button>
 
 <div class="carta" id="carta">
 Flor ❤️  
 <br><br>
-Eres mi compañera de viaje, mi paz, mi alegría y mi hogar.  
-Gracias por cada momento, por cada abrazo y por caminar conmigo.  
-Prometo cuidarte, amarte y elegirte todos los días.  
+Prometo amarte con paciencia, con fe y con propósito.  
+Quiero caminar contigo de la mano de Dios todos los días de mi vida.  
+Eres mi compañera de viaje, mi bendición y mi hogar.  
 <br><br>
 Siempre tuyo,  
 Kevin 💖
+</div>
+
+<div class="seccion">
+<h2>Palabra de Dios para Nosotros 🙏</h2>
+<p><b>Colosenses 3:14</b><br>
+"Por encima de todo, vístanse de amor, que es el vínculo perfecto".</p>
+
+<p><b>1 Corintios 13:4-7</b><br>
+"El amor es sufrido, es benigno; el amor no tiene envidia..."</p>
+
+<p><b>Cantares 4:7</b><br>
+"Toda tú eres bella, amada mía; no hay en ti defecto alguno".</p>
+
+<p><b>Proverbios 18:22</b><br>
+"Quien halla esposa halla la felicidad: muestras de su favor le ha dado el Señor".</p>
+</div>
+
+<div class="seccion">
+<h2>Nuestro Recuerdo 🎥</h2>
+<video width="300" controls>
+  <source src="video.mp4" type="video/mp4">
+</video>
 </div>
 
 <audio id="musica" loop>
@@ -129,66 +194,69 @@ Kevin 💖
 </audio>
 
 <script>
-// CONTADOR COMPLETO
-const inicio = new Date("2026-01-20");
-
-function actualizarContador(){
-  const hoy = new Date();
-  let años = hoy.getFullYear() - inicio.getFullYear();
-  let meses = hoy.getMonth() - inicio.getMonth();
-  let dias = hoy.getDate() - inicio.getDate();
-
-  if(dias < 0){
-    meses--;
-    dias += 30;
-  }
-  if(meses < 0){
-    años--;
-    meses += 12;
-  }
-
-  document.getElementById("contador").innerHTML =
-  `💕 ${años} años, ${meses} meses y ${dias} días juntos 💕`;
+// Entrar
+function entrar(){
+  document.getElementById("intro").style.display="none";
+  document.getElementById("musica").play();
 }
 
-setInterval(actualizarContador,1000);
-actualizarContador();
+// Contador
+const inicio = new Date("2026-01-20");
+function actualizar(){
+  const hoy = new Date();
+  const dias = Math.floor((hoy - inicio)/(1000*60*60*24));
+  document.getElementById("contador").innerHTML =
+  "💕 " + dias + " días juntos bajo la bendición de Dios 💕";
+}
+setInterval(actualizar,1000);
+actualizar();
 
-// CARRUSEL
-const imagenes = ["foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg"];
-let i = 0;
-
+// Carrusel
+const imagenes=["foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg"];
+let i=0;
 setInterval(()=>{
-  i = (i+1) % imagenes.length;
-  document.getElementById("foto").src = imagenes[i];
+  i=(i+1)%imagenes.length;
+  document.getElementById("foto").src=imagenes[i];
 },4000);
 
-// MUSICA
+// Música
 function toggleMusica(){
-  const musica = document.getElementById("musica");
-  if(musica.paused){
-    musica.play();
-  } else {
-    musica.pause();
-  }
+  const m=document.getElementById("musica");
+  m.paused?m.play():m.pause();
 }
 
-// CARTA
+// Carta
 function abrirCarta(){
-  const carta = document.getElementById("carta");
-  carta.style.display = carta.style.display === "none" ? "block" : "none";
+  const c=document.getElementById("carta");
+  c.style.display=c.style.display==="block"?"none":"block";
 }
 
-// CORAZONES
-setInterval(()=>{
-  const corazon = document.createElement("div");
-  corazon.innerHTML = "❤️";
-  corazon.className = "corazon";
-  corazon.style.left = Math.random() * 100 + "vw";
-  corazon.style.fontSize = Math.random() * 20 + 20 + "px";
-  document.body.appendChild(corazon);
+// Scroll animado
+window.addEventListener("scroll",()=>{
+  document.querySelectorAll(".seccion").forEach(sec=>{
+    if(sec.getBoundingClientRect().top < window.innerHeight-50){
+      sec.classList.add("visible");
+    }
+  });
+});
 
-  setTimeout(()=>{corazon.remove();},6000);
+// Estrellas
+for(let j=0;j<80;j++){
+  const estrella=document.createElement("div");
+  estrella.className="estrella";
+  estrella.style.top=Math.random()*100+"vh";
+  estrella.style.left=Math.random()*100+"vw";
+  document.body.appendChild(estrella);
+}
+
+// Lluvia final
+setInterval(()=>{
+  const corazon=document.createElement("div");
+  corazon.innerHTML="❤️";
+  corazon.className="corazon";
+  corazon.style.left=Math.random()*100+"vw";
+  document.body.appendChild(corazon);
+  setTimeout(()=>corazon.remove(),5000);
 },800);
 </script>
 
