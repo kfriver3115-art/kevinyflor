@@ -74,7 +74,7 @@ h1{
   color:#ffccd5;
 }
 
-/* GALERIA 5 FOTOS */
+/* GALERIA */
 .galeria{
   display:flex;
   justify-content:center;
@@ -141,12 +141,46 @@ button{
   from{transform:translateY(0); opacity:1;}
   to{transform:translateY(-100vh); opacity:0;}
 }
+
+/* FINAL IMPACTO */
+.overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:radial-gradient(circle, rgba(255,0,90,0.4), rgba(0,0,0,0.9));
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:1s;
+}
+
+.overlay h1{
+  font-size:50px;
+  margin-top:20px;
+  color:#fff;
+  text-shadow:0 0 20px #ff4d6d;
+}
+
+.ring{
+  font-size:120px;
+  animation:latido 1.5s infinite;
+}
+
+@keyframes latido{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
 </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
 <div id="intro">
   <h1>Flor… ❤️<br><br>Antes de entrar, quiero que sepas algo.</h1>
   <button onclick="entrar()">Entrar a Nuestra Historia ✨</button>
@@ -157,7 +191,6 @@ button{
 <p>Y cada paso que damos, lo damos tomados de Su mano </p>
 <div class="contador" id="contador"></div>
 
-<!-- GALERIA NUEVA -->
 <div class="galeria">
   <img src="foto1.jpg">
   <img src="foto2.jpg">
@@ -181,29 +214,6 @@ Kevin 💖
 </div>
 
 <div class="seccion">
-<h2>Palabra de Dios para Nosotros 🙏</h2>
-<p><b>Colosenses 3:14</b><br>
-"Por encima de todo, vístanse de amor, que es el vínculo perfecto".</p>
-
-<p><b>1 Corintios 13:4-7</b><br>
-"El amor es sufrido, es benigno..."</p>
-
-<p><b>Cantares 4:7</b><br>
-"Toda tú eres bella, amada mía."</p>
-
-<p><b>Proverbios 18:22</b><br>
-"Quien halla esposa halla la felicidad."</p>
-</div>
-
-<div class="seccion">
-<h2>Nuestro Recuerdo 🎥</h2>
-<video width="300" controls>
-  <source src="video.mp4" type="video/mp4">
-</video>
-</div>
-
-<!-- FINAL IMPACTANTE -->
-<div class="seccion">
   <h1 style="font-size:36px; margin-top:80px;">
     Flor, quiero caminar contigo toda la vida ❤️
   </h1>
@@ -215,42 +225,35 @@ Kevin 💖
   <button onclick="finalImpactante()">Siempre ❤️</button>
 </div>
 
+<!-- OVERLAY FINAL -->
+<div class="overlay" id="overlay">
+  <div class="ring">💍</div>
+  <h1>Te amo Flor ❤️</h1>
+</div>
+
 <audio id="musica" loop>
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-// Entrar
 function entrar(){
   document.getElementById("intro").style.display="none";
   document.getElementById("musica").play();
 }
-
-// Contador
-const inicio = new Date("2026-01-20");
-function actualizar(){
-  const hoy = new Date();
-  const dias = Math.floor((hoy - inicio)/(1000*60*60*24));
-  document.getElementById("contador").innerHTML =
-  "💕 " + dias + " días juntos bajo la bendición de Dios 💕";
-}
 setInterval(actualizar,1000);
 actualizar();
 
-// Música
 function toggleMusica(){
   const m=document.getElementById("musica");
   m.paused?m.play():m.pause();
 }
 
-// Carta
 function abrirCarta(){
   const c=document.getElementById("carta");
   c.style.display=c.style.display==="block"?"none":"block";
 }
 
-// Scroll animado
 window.addEventListener("scroll",()=>{
   document.querySelectorAll(".seccion").forEach(sec=>{
     if(sec.getBoundingClientRect().top < window.innerHeight-50){
@@ -259,7 +262,6 @@ window.addEventListener("scroll",()=>{
   });
 });
 
-// Estrellas
 for(let j=0;j<80;j++){
   const estrella=document.createElement("div");
   estrella.className="estrella";
@@ -268,7 +270,6 @@ for(let j=0;j<80;j++){
   document.body.appendChild(estrella);
 }
 
-// Lluvia suave constante
 setInterval(()=>{
   const corazon=document.createElement("div");
   corazon.innerHTML="❤️";
@@ -278,8 +279,8 @@ setInterval(()=>{
   setTimeout(()=>corazon.remove(),5000);
 },2000);
 
-// FINAL IMPACTANTE
 function finalImpactante(){
+
   for(let k=0;k<150;k++){
     const corazon=document.createElement("div");
     corazon.innerHTML="💖";
@@ -290,6 +291,9 @@ function finalImpactante(){
     document.body.appendChild(corazon);
     setTimeout(()=>corazon.remove(),5000);
   }
+
+  document.getElementById("overlay").style.opacity="1";
+  document.getElementById("overlay").style.pointerEvents="auto";
 }
 
 </script>
