@@ -15,9 +15,11 @@ body{
   overflow-x:hidden;
 }
 
-/* Pantalla Inicial */
+/* INTRO LIMPIA */
 #intro{
   position:fixed;
+  top:0;
+  left:0;
   width:100%;
   height:100%;
   background:black;
@@ -25,12 +27,11 @@ body{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  z-index:10;
+  z-index:9999;
 }
 
 #intro h1{
   font-size:28px;
-  opacity:0;
   animation:fadeIn 3s forwards;
 }
 
@@ -45,6 +46,7 @@ body{
 }
 
 @keyframes fadeIn{
+  from{opacity:0;}
   to{opacity:1;}
 }
 
@@ -68,35 +70,30 @@ h1{
   color:#ff4d6d;
 }
 
-.contador{
-  margin-top:20px;
-  font-size:22px;
-  color:#ffccd5;
-}
-
-/* GALERIA */
+/* GALERÍA */
 .galeria{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
   gap:15px;
-  margin:40px auto;
-  max-width:700px;
+  padding:30px;
+  max-width:800px;
+  margin:auto;
 }
 
 .galeria img{
-  width:150px;
-  height:200px;
+  width:100%;
+  height:220px;
   object-fit:cover;
   border-radius:15px;
   box-shadow:0 0 20px rgba(255,0,90,0.5);
-  transition:0.4s;
+  transition:0.5s;
 }
 
 .galeria img:hover{
-  transform:scale(1.08);
+  transform:scale(1.05);
 }
 
+/* Secciones */
 .seccion{
   margin:50px 20px;
   opacity:0;
@@ -117,8 +114,10 @@ button{
   color:white;
   cursor:pointer;
   margin:10px;
+  font-size:16px;
 }
 
+/* Carta */
 .carta{
   display:none;
   margin:20px auto;
@@ -127,6 +126,44 @@ button{
   padding:20px;
   border-radius:15px;
   box-shadow:0 0 20px rgba(255,0,90,0.5);
+}
+
+/* FINAL IMPACTANTE */
+#final{
+  margin-top:80px;
+  padding:60px 20px;
+}
+
+#final h2{
+  font-size:40px;
+  color:#ff4d6d;
+}
+
+#final p{
+  font-size:24px;
+}
+
+#anillo{
+  display:none;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:120px;
+  animation:zoom 1s ease forwards;
+  z-index:10000;
+}
+
+#anillo span{
+  display:block;
+  font-size:40px;
+  margin-top:20px;
+  color:#ffccd5;
+}
+
+@keyframes zoom{
+  from{transform:translate(-50%,-50%) scale(0);}
+  to{transform:translate(-50%,-50%) scale(1);}
 }
 
 /* Corazones */
@@ -141,56 +178,22 @@ button{
   from{transform:translateY(0); opacity:1;}
   to{transform:translateY(-100vh); opacity:0;}
 }
-
-/* FINAL IMPACTO */
-.overlay{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:radial-gradient(circle, rgba(255,0,90,0.4), rgba(0,0,0,0.9));
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  opacity:0;
-  pointer-events:none;
-  transition:1s;
-}
-
-.overlay h1{
-  font-size:50px;
-  margin-top:20px;
-  color:#fff;
-  text-shadow:0 0 20px #ff4d6d;
-}
-
-.ring{
-  font-size:120px;
-  animation:latido 1.5s infinite;
-}
-
-@keyframes latido{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.2);}
-  100%{transform:scale(1);}
-}
 </style>
 </head>
 
 <body>
 
+<!-- INTRO -->
 <div id="intro">
   <h1>Flor… ❤️<br><br>Antes de entrar, quiero que sepas algo.</h1>
   <button onclick="entrar()">Entrar a Nuestra Historia ✨</button>
 </div>
 
 <h1>Kevin & Flor ❤️</h1>
-<p>Gracias Dios por unirnos🙏</p>
-<p>Y cada paso que damos, lo damos tomados de Su mano </p>
-<div class="contador" id="contador"></div>
+<p>Gracias Dios por unirnos 🙏</p>
+<p>Y cada paso que damos, lo damos tomados de Su mano</p>
 
+<!-- GALERÍA DE 5 FOTOS -->
 <div class="galeria">
   <img src="foto1.jpg">
   <img src="foto2.jpg">
@@ -214,21 +217,24 @@ Kevin 💖
 </div>
 
 <div class="seccion">
-  <h1 style="font-size:36px; margin-top:80px;">
-    Flor, quiero caminar contigo toda la vida ❤️
-  </h1>
+<h2>Palabra de Dios para Nosotros 🙏</h2>
+<p><b>Colosenses 3:14</b><br>
+"Por encima de todo, vístanse de amor, que es el vínculo perfecto".</p>
 
-  <h2 style="margin-top:30px;">
-    💍 ¿Quieres seguir siendo mi compañera de viaje?
-  </h2>
-
-  <button onclick="finalImpactante()">Siempre ❤️</button>
+<p><b>1 Corintios 13:4-7</b><br>
+"El amor todo lo sufre, todo lo cree, todo lo espera, todo lo soporta."</p>
 </div>
 
-<!-- OVERLAY FINAL -->
-<div class="overlay" id="overlay">
-  <div class="ring">💍</div>
-  <h1>Te amo Flor ❤️</h1>
+<!-- FINAL IMPACTANTE -->
+<div id="final">
+  <h2>Flor, quiero caminar contigo toda la vida.</h2>
+  <p>💍 ¿Quieres seguir siendo mi compañera de viaje?</p>
+  <button onclick="respuesta()">Siempre ❤️</button>
+</div>
+
+<div id="anillo">
+  💍
+  <span>Te Amo ❤️</span>
 </div>
 
 <audio id="musica" loop>
@@ -237,23 +243,25 @@ Kevin 💖
 
 <script>
 
+// ENTRAR
 function entrar(){
   document.getElementById("intro").style.display="none";
   document.getElementById("musica").play();
 }
-setInterval(actualizar,1000);
-actualizar();
 
+// MÚSICA
 function toggleMusica(){
   const m=document.getElementById("musica");
   m.paused?m.play():m.pause();
 }
 
+// CARTA
 function abrirCarta(){
   const c=document.getElementById("carta");
   c.style.display=c.style.display==="block"?"none":"block";
 }
 
+// SCROLL ANIMADO
 window.addEventListener("scroll",()=>{
   document.querySelectorAll(".seccion").forEach(sec=>{
     if(sec.getBoundingClientRect().top < window.innerHeight-50){
@@ -262,6 +270,7 @@ window.addEventListener("scroll",()=>{
   });
 });
 
+// ESTRELLAS
 for(let j=0;j<80;j++){
   const estrella=document.createElement("div");
   estrella.className="estrella";
@@ -270,30 +279,20 @@ for(let j=0;j<80;j++){
   document.body.appendChild(estrella);
 }
 
-setInterval(()=>{
-  const corazon=document.createElement("div");
-  corazon.innerHTML="❤️";
-  corazon.className="corazon";
-  corazon.style.left=Math.random()*100+"vw";
-  document.body.appendChild(corazon);
-  setTimeout(()=>corazon.remove(),5000);
-},2000);
-
-function finalImpactante(){
-
-  for(let k=0;k<150;k++){
+// RESPUESTA FINAL
+function respuesta(){
+  document.getElementById("anillo").style.display="block";
+  
+  // Lluvia intensa
+  setInterval(()=>{
     const corazon=document.createElement("div");
-    corazon.innerHTML="💖";
+    corazon.innerHTML="❤️";
     corazon.className="corazon";
     corazon.style.left=Math.random()*100+"vw";
-    corazon.style.fontSize=(Math.random()*25+20)+"px";
-    corazon.style.animationDuration=(Math.random()*3+2)+"s";
+    corazon.style.fontSize=(20+Math.random()*30)+"px";
     document.body.appendChild(corazon);
     setTimeout(()=>corazon.remove(),5000);
-  }
-
-  document.getElementById("overlay").style.opacity="1";
-  document.getElementById("overlay").style.pointerEvents="auto";
+  },150);
 }
 
 </script>
